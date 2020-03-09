@@ -19,4 +19,16 @@ export const writeResult = winner => {
   };
 };
 
-export default { makeStep };
+export const prevBoard = () => {
+  return {
+    type: types.PREV_BOARD,
+  };
+};
+
+export const nextBoard = () => {
+  return {
+    type: types.NEXT_BOARD,
+  };
+};
+
+export default { makeStep, writeResult, prevBoard, nextBoard };

@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Board } from '../../components/Board';
-import { makeStep, writeResult } from '../../redux/actions';
+import { makeStep, writeResult, prevBoard, nextBoard } from '../../redux/actions';
 import { checkWinner } from '../../utils';
 import { AppWrapper } from './App.style';
 import { Button } from '../../common/Button';
 
-function App({ board, currentPlayer, setsPlayed, stepsLeft, result, dispatch }) {
-  const winner = checkWinner(board);
+function App({ history, currentBoard, currentPlayer, setsPlayed, stepsLeft, result, dispatch }) {
+  console.log(history[currentBoard]);
+  console.log(currentBoard);
+  const winner = checkWinner(history[currentBoard]);
   if (winner) {
     dispatch(writeResult(winner));
   }
@@ -17,19 +19,39 @@ function App({ board, currentPlayer, setsPlayed, stepsLeft, result, dispatch }) 
   }
 
   const stepHandler = index => {
-    if (board[index].value) {
+    if (history[currentBoard][index].value) {
       return;
     }
     dispatch(makeStep(index, currentPlayer));
   };
 
+  const nextHandler = () => {
+    dispatch(nextBoard());
+  };
+
+  const prevHandler = () => {
+    dispatch(prevBoard());
+  };
+
+  const isLastBoard = history.length - 1 === currentBoard;
+
   return (
     <AppWrapper>
       <div className="history">
-        <Button className="history-btn--prev" label="Step Back" />
-        <Button className="history-btn--next" label="Step Forward" />
+        <Button
+          className="history-btn--prev"
+          label="Step Back"
+          disabled={!currentBoard}
+          onClick={prevHandler}
+        />
+        <Button
+          className="history-btn--next"
+          label="Step Forward"
+          disabled={isLastBoard}
+          onClick={nextHandler}
+        />
       </div>
-      <Board plan={board} onCellClick={stepHandler} />
+      <Board plan={history[currentBoard]} onCellClick={stepHandler} />
       <div>
         <p>Set played: {setsPlayed}</p>
         <p>Player 1 wins: {result.X}</p>
@@ -41,7 +63,8 @@ function App({ board, currentPlayer, setsPlayed, stepsLeft, result, dispatch }) 
 
 const mapStateToProps = store => {
   return {
-    board: store.board,
+    history: store.history,
+    currentBoard: store.currentBoard,
     currentPlayer: store.currentPlayer,
     setsPlayed: store.setsPlayed,
     stepsLeft: store.stepsLeft,

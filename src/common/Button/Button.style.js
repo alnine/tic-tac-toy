@@ -9,6 +9,10 @@ const DefaultButton = styled.button`
   background: none;
   cursor: pointer;
   outline: none;
+
+  :disabled {
+    cursor: default;
+  }
 `;
 
 export default DefaultButton;
