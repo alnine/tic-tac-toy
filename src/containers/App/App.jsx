@@ -1,14 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Board } from '../../components/Board';
 
-function App() {
+function App({ board }) {
   return (
-    <div className="App">
+    <div className="app">
       <div>
         <button type="button">Step Back</button>
         <button type="button">Step Forward</button>
       </div>
-      <Board />
+      <Board plan={board} />
       <div className="result">
         <p>Set played: 5</p>
         <p>Player 1 wins: 1</p>
@@ -18,4 +19,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = store => {
+  return {
+    board: store.boardState.board,
+  };
+};
+
+export default connect(mapStateToProps)(App);
