@@ -1,19 +1,24 @@
-import { combineReducers } from 'redux';
 import * as types from '../constants/actionTypes';
 import { generateEmptyBoard } from '../utils';
 
-const initialBoardState = {
+const initialState = {
   board: generateEmptyBoard(),
+  currentPlayer: 'X',
 };
 
-const boardReducer = (state = initialBoardState, action) => {
-  switch (action.type) {
+const reducers = (state = initialState, { type, payload }) => {
+  switch (type) {
     case types.MAKE_STEP: {
+      const newCurrentPlayer = payload.value === 'X' ? 'O' : 'X';
       const newBoard = [...state.board];
-      newBoard[action.id] = 'X';
+      newBoard[payload.index] = {
+        id: payload.index,
+        value: payload.value,
+      };
       return {
         ...state,
         board: newBoard,
+        currentPlayer: newCurrentPlayer,
       };
     }
 
@@ -22,6 +27,4 @@ const boardReducer = (state = initialBoardState, action) => {
   }
 };
 
-export default combineReducers({
-  boardState: boardReducer,
-});
+export default reducers;
