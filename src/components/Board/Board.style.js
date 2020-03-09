@@ -4,7 +4,7 @@ const StyledBoard = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 6em;
-  font-size: 1em;
+  font-size: 1.5em;
 `;
 
 export default StyledBoard;

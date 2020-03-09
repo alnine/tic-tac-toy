@@ -4,6 +4,7 @@ import { Board } from '../../components/Board';
 import { makeStep, writeResult } from '../../redux/actions';
 import { checkWinner } from '../../utils';
 import { AppWrapper } from './App.style';
+import { Button } from '../../common/Button';
 
 function App({ board, currentPlayer, setsPlayed, stepsLeft, result, dispatch }) {
   const winner = checkWinner(board);
@@ -24,13 +25,12 @@ function App({ board, currentPlayer, setsPlayed, stepsLeft, result, dispatch }) 
 
   return (
     <AppWrapper>
-      <div>
-        <button type="button">Step Back</button>
-        <button type="button">Step Forward</button>
+      <div className="history">
+        <Button className="history-btn--prev" label="Step Back" />
+        <Button className="history-btn--next" label="Step Forward" />
       </div>
-      <div>Current Player: {currentPlayer}</div>
       <Board plan={board} onCellClick={stepHandler} />
-      <div className="result">
+      <div>
         <p>Set played: {setsPlayed}</p>
         <p>Player 1 wins: {result.X}</p>
         <p>Player 2 wins: {result.O}</p>
