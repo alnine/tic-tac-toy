@@ -1,6 +1,6 @@
-export const generateEmptyBoard = (size = 3) => {
-  const cellCount = size ** 2;
-  const initialArr = Array(cellCount).fill({});
+export const generateEmptyBoard = () => {
+  const BOARD_SIZE = 9;
+  const initialArr = Array(BOARD_SIZE).fill({});
 
   const emptyBoard = initialArr.map((item, index) => {
     return { id: index, value: null };
