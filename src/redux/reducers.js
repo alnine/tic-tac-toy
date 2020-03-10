@@ -1,5 +1,5 @@
 import * as types from '../constants/actionTypes';
-import { generateEmptyBoard } from '../utils';
+import { generateEmptyBoard } from '../utils/helpers';
 
 const initialState = {
   history: [generateEmptyBoard()],

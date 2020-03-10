@@ -10,6 +10,13 @@ export const generateEmptyBoard = () => {
 };
 
 export const checkWinner = board => {
+  if (typeof board === 'undefined') {
+    return null;
+  }
+
+  if (!Array.isArray(board) || board.length === 0) {
+    return null;
+  }
   const lines = [
     [0, 1, 2],
     [3, 4, 5],

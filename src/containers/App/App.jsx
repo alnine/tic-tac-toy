@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Board } from '../../components/Board';
 import { makeStep, writeResult, prevBoard, nextBoard } from '../../redux/actions';
-import { checkWinner } from '../../utils';
+import { checkWinner } from '../../utils/helpers';
 import { AppWrapper } from './App.style';
 import { Button } from '../../common/Button';
 
