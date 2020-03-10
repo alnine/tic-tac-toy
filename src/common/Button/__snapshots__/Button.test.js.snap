@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render correctly button component 1`] = `
+<button
+  className="sc-AxjAm kYzbGw"
+  disabled={false}
+  onClick={null}
+/>
+`;
